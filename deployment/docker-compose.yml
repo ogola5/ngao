@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  server:
+    build:
+      context: ..
+      dockerfile: deployment/Dockerfile.server
+    volumes:
+      - shared_logs:/app/logs
+    ports:
+      - "8080:8080"
+    networks:
+      - ngao_net
+
+  dashboard:
+    build:
+      context: ..
+      dockerfile: deployment/Dockerfile.dashboard
+    volumes:
+      - shared_logs:/app/logs
+    ports:
+      - "8501:8501"
+    depends_on:
+      - server
+    networks:
+      - ngao_net
+
+  client_1:
+    build:
+      context: ..
+      dockerfile: deployment/Dockerfile.client
+    command: ["--node-id", "1"]
+    depends_on:
+      - server
+    volumes:
+      - shared_logs:/app/logs
+    networks:
+      - ngao_net
+
+  client_2:
+    build:
+      context: ..
+      dockerfile: deployment/Dockerfile.client
+    command: ["--node-id", "2"]
+    depends_on:
+      - server
+    volumes:
+      - shared_logs:/app/logs
+    networks:
+      - ngao_net
+
+volumes:
+  shared_logs:
+
+networks:
+  ngao_net:

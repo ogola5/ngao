@@ -1,0 +1,29 @@
+# --- Python ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+ngao/
+.env
+.pytest_cache/
+.mypy_cache/
+
+# --- Project Specific ---
+# Ignore generated logs and data so every user starts fresh
+logs/
+*.csv
+data/
+!src/utils/data_gen.py  # Keep the generator script, ignore the output
+
+# --- Docker ---
+.docker/
+
+# --- OS Specific ---
+.DS_Store
+Thumbs.db
+
+# --- IDEs ---
+.vscode/
+.idea/

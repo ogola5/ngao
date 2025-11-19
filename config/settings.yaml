@@ -1,0 +1,19 @@
+system:
+  app_name: "Ngao-Shield"
+  version: "1.0.0"
+
+federated:
+  rounds: 10
+  min_clients: 2
+  # CHANGE THIS: Clients must talk to the docker service name "server"
+  server_address: "server:8080" 
+
+model:
+  input_size: 4
+  hidden_size: 16
+  output_size: 2
+  learning_rate: 0.01
+  epochs: 1
+
+paths:
+  log_file: "/app/logs/training_metrics.csv"
