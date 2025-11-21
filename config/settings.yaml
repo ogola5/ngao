@@ -5,7 +5,7 @@ system:
 federated:
   rounds: 30           # Increased to keep the demo running longer
   min_clients: 2
-  server_address: "server:8080"
+  server_address: "localhost:8080"
 
 model:
   input_size: 4
