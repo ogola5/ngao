@@ -1,8 +1,17 @@
 FROM python:3.9-slim
+
 WORKDIR /app
+
+# 1. Copy requirements first to cache the installation layer
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
+
+# 2. Copy Code (Docker needs this for the initial build)
 COPY config/ ./config
 COPY src/ ./src
+
+# 3. Environment Variables
 ENV PYTHONPATH=/app
+ENV PYTHONUNBUFFERED=1 
+
 CMD ["python", "-m", "src.nodes.server"]

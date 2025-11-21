@@ -1,15 +1,17 @@
 FROM python:3.9-slim
+
 WORKDIR /app
 
-# Copy requirements first
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
+# Explicitly install streamlit just to be safe
+RUN pip install streamlit
 
-# Copy code
 COPY config/ ./config
 COPY dashboard/ ./dashboard
 
 ENV PYTHONPATH=/app
+ENV PYTHONUNBUFFERED=1 
 
-# Explicitly call the module
+# Run Streamlit as a module to avoid path issues
 CMD ["python", "-m", "streamlit", "run", "dashboard/app.py", "--server.port=8501", "--server.address=0.0.0.0"]

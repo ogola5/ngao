@@ -1,14 +1,13 @@
-version: '3.8'
-
 services:
   server:
     build:
       context: ..
       dockerfile: deployment/Dockerfile.server
-    volumes:
-      - shared_logs:/app/logs
     ports:
       - "8080:8080"
+    volumes:
+      - shared_logs:/app/logs  # For writing CSV logs
+      - ../:/app               # <--- MAGIC: Maps local code to container (Live Editing)
     networks:
       - ngao_net
 
@@ -16,12 +15,13 @@ services:
     build:
       context: ..
       dockerfile: deployment/Dockerfile.dashboard
-    volumes:
-      - shared_logs:/app/logs
     ports:
       - "8501:8501"
     depends_on:
       - server
+    volumes:
+      - shared_logs:/app/logs  # For reading CSV logs
+      - ../:/app               # <--- MAGIC: Maps local code to container
     networks:
       - ngao_net
 
@@ -33,7 +33,7 @@ services:
     depends_on:
       - server
     volumes:
-      - shared_logs:/app/logs
+      - ../:/app               # <--- MAGIC: Maps local code to container
     networks:
       - ngao_net
 
@@ -45,7 +45,7 @@ services:
     depends_on:
       - server
     volumes:
-      - shared_logs:/app/logs
+      - ../:/app               # <--- MAGIC: Maps local code to container
     networks:
       - ngao_net
 

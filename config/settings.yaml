@@ -3,17 +3,16 @@ system:
   version: "1.0.0"
 
 federated:
-  rounds: 10
+  rounds: 30           # Increased to keep the demo running longer
   min_clients: 2
-  # CHANGE THIS: Clients must talk to the docker service name "server"
-  server_address: "server:8080" 
+  server_address: "server:8080"
 
 model:
   input_size: 4
   hidden_size: 16
   output_size: 2
   learning_rate: 0.01
-  epochs: 1
+  epochs: 5            # INCREASED: Forces AI to learn harder locally
 
 paths:
   log_file: "/app/logs/training_metrics.csv"
