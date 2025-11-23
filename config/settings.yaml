@@ -15,4 +15,4 @@ model:
   epochs: 5            # INCREASED: Forces AI to learn harder locally
 
 paths:
-  log_file: "/app/logs/training_metrics.csv"
+  log_file: "logs/training_metrics.csv"
